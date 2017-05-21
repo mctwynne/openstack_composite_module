@@ -1,0 +1,5 @@
+lint:
+  script:
+  - export RBENV_VERSION=2.1.9
+  - bundle install --path vendor
+  - bundle exec rake lint 

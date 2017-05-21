@@ -1,0 +1,13 @@
+{
+  "name": "openstack",
+  "version": "0.1.0",
+  "author": "martin",
+  "summary": "test test",
+  "license": "Apache-2.0",
+  "source": "test",
+  "project_page": "test",
+  "issues_url": "test",
+  "dependencies": [
+  ],
+  "data_provider": null
+}

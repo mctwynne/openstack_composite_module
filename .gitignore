@@ -1,0 +1,6 @@
+Gemfile.lock
+vendor
+modules
+.vagrant
+.bundle
+.ruby-version
