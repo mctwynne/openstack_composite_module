@@ -36,7 +36,7 @@ class openstack::profile::neutron::api {
     project_domain_name => 'Default',
     auth_url            => "${base_url}:35357/v3",
     auth_uri            => "${base_url}:5000/v3",
-    memcached_servers   => "${memcached_servers}",
+    memcached_servers   => $memcached_servers,
   }
   class { '::neutron::server':
     database_connection => 'mysql+pymysql://neutron:neutron@127.0.0.1/neutron?charset=utf8',

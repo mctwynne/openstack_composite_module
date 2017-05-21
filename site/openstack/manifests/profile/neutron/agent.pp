@@ -20,8 +20,8 @@ class openstack::profile::neutron::agent {
     metadata_workers  => 2,
     metadata_protocol => $metadata_protocol,
     metadata_insecure => false,
-    /* nova_client_cert  => $nova_client_cert,
-    nova_client_priv_key => $nova_client_priv_key, */
+    #nova_client_cert  => $nova_client_cert,
+    #nova_client_priv_key => $nova_client_priv_key,
   }
   class { '::neutron::agents::l3':
     interface_driver => $driver,

@@ -2,8 +2,8 @@ class openstack::profile::neutron::common {
 
   $base_url = 'http://192.168.0.10'
 
+  $driver = ['openvswitch']
   $firewall_driver  = 'openvswitch'
-  $mechanism_drivers = 'openvswitch'
 
   class { '::neutron':
     default_transport_url => os_transport_url({

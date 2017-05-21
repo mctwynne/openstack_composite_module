@@ -38,7 +38,7 @@ class openstack::profile::nova::api {
     project_domain_name => 'Default',
     auth_url            => "${base_url}:35357/v3",
     auth_uri            => "${base_url}:5000/v3",
-    memcached_servers   => "${memcached_servers}",
+    memcached_servers   => $memcached_servers,
   }
   class { '::nova::keystone::auth_placement':
     public_url   => "${base_url}:8778/placement",
