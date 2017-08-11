@@ -20,6 +20,7 @@ vagrant up controller
 ```
 vagrant ssh controller
 sudo -i
+source openrc
 nova-status upgrade check
 nova-manage cell_v2 simple_cell_setup
 nova-status upgrade check
@@ -30,6 +31,14 @@ nova-status upgrade check
 vagrant up compute
 ```
 
+### after the compute is startet login to the controller again
+```
+sudo -i
+source openrc
+nova-status upgrade check
+nova-manage cell_v2 simple_cell_setup
+nova-status upgrade check
+```
 ### add an entry to your /etc/hosts
 ```
 192.168.0.10	controller.tuxadero.com
