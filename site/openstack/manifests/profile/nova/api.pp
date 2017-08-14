@@ -1,6 +1,6 @@
 class openstack::profile::nova::api {
 
-  $base_url = 'http://192.168.0.10'
+  $base_url = 'http://192.168.70.111'
   include ::openstack::profile::nova::common
 
   $memcached_servers = '127.0.0.1'
@@ -47,15 +47,16 @@ class openstack::profile::nova::api {
     password     => 'a_big_secret',
   }
   class { '::nova::api':
-    api_bind_address                     => '192.168.0.10',
+    api_bind_address                     => '192.168.70.111',
     neutron_metadata_proxy_shared_secret => 'a_big_secret',
     metadata_workers                     => 2,
     osapi_compute_workers                => 2,
     default_floating_pool                => 'public',
     sync_db_api                          => true,
+    install_cinder_client                => false,
   }
   class { '::nova::wsgi::apache_placement':
-    bind_host => '192.168.0.10',
+    bind_host => '192.168.70.111',
     api_port  => '8778',
     #ssl_key  => "/etc/nova/ssl/private/${::fqdn}.pem",
     #ssl_cert => $::openstack_integration::params::cert_path,

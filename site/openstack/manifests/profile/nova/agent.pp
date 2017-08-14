@@ -2,11 +2,11 @@ class openstack::profile::nova::agent {
 
   include ::openstack::profile::nova::common
 
-  $base_url = 'http://192.168.0.10'
+  $base_url = 'http://192.168.70.111'
 
   class { '::nova::compute':
-    vncproxy_host                 => '192.168.0.10',
-    vncserver_proxyclient_address => '192.168.0.20',
+    vncproxy_host                 => '192.168.70.111',
+    vncserver_proxyclient_address => '192.168.70.112',
     vnc_enabled                   => true,
     instance_usage_audit          => true,
     instance_usage_audit_period   => 'hour',

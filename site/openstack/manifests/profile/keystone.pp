@@ -1,6 +1,6 @@
 class openstack::profile::keystone {
 
-  $base_url = 'http://192.168.0.10'
+  $base_url = 'http://192.168.70.111'
 
   include ::apache
 

@@ -1,6 +1,6 @@
 class openstack::profile::glance {
 
-  $base_url = 'http://192.168.0.10'
+  $base_url = 'http://192.168.70.111'
   $memcached_servers = '127.0.0.1'
 
   rabbitmq_user { 'glance':
@@ -40,7 +40,7 @@ class openstack::profile::glance {
     workers             => 2,
     stores              => ['file'],
     default_store       => ['file'],
-    bind_host           => '192.168.0.10',
+    bind_host           => '192.168.70.111',
     enable_v1_api       => false,
     enable_v2_api       => true,
   }
