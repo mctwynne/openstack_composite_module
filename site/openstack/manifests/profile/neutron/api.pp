@@ -43,12 +43,10 @@ class openstack::profile::neutron::api {
     sync_db             => true,
     api_workers         => 2,
     rpc_workers         => 2,
-    service_providers   => [ 'LOADBALANCERV2:Haproxy:neutron_lbaas.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default'],
     router_distributed  => true,
   }
   class { '::neutron::server::notifications':
     auth_url => 'http://192.168.70.111:35357/v3',
     password => 'a_big_secret',
   }
-  class { '::neutron::services::lbaas': }
 }
