@@ -1,6 +1,7 @@
 class openstack::profile::neutron::common {
 
-  $base_url = 'http://192.168.0.10'
+  $ip_addr = '192.168.70.111'
+  $base_url = 'http://${ip_addr}'
 
   $driver = ['openvswitch']
   $firewall_driver  = 'openvswitch'
@@ -8,19 +9,17 @@ class openstack::profile::neutron::common {
   class { '::neutron':
     default_transport_url => os_transport_url({
       'transport' => 'rabbit',
-      'host'      => '192.168.0.10',
+      'host'      => $ip_addr,
       'username'  => 'neutron',
       'password'  => 'an_even_bigger_secret',
       }),
     allow_overlapping_ips => true,
     core_plugin           => 'ml2',
-    service_plugins       => ['router', 'neutron_lbaas.services.loadbalancer.plugin.LoadBalancerPluginv2'],
+    service_plugins       => ['router'],
     debug                 => true,
-    bind_host             => '192.168.0.10',
-    #use_ssl              => $::openstack_integration::config::ssl,
-    #cert_file            => $::openstack_integration::params::cert_path,
-    #key_file             => "/etc/neutron/ssl/private/${::fqdn}.pem",
+    bind_host             => $ip_addr,
   }
+
   class { '::neutron::plugins::ml2':
         type_drivers         => ['vxlan', 'vlan', 'flat'],
         tenant_network_types => ['vxlan', 'vlan', 'flat'],

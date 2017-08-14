@@ -1,4 +1,4 @@
-class openstack::profile::neutron::agent {
+class openstack::profile::neutron::control_agent {
 
   include ::openstack::profile::neutron::common
 
@@ -7,7 +7,7 @@ class openstack::profile::neutron::agent {
 
   class { '::neutron::agents::ml2::ovs':
     enable_tunneling => true,
-    local_ip         => '192.168.70.112',
+    local_ip         => '192.168.70.111',
     enabled          => true,
     tunnel_types     => ['vxlan'],
     bridge_mappings  => ['external:br-ex'],

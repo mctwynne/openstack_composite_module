@@ -1,4 +1,4 @@
-class openstack::profile::neutron::agent {
+class openstack::profile::neutron::compute_agent {
 
   include ::openstack::profile::neutron::common
 
@@ -28,11 +28,6 @@ class openstack::profile::neutron::agent {
   class { '::neutron::agents::l3':
     interface_driver => $driver,
     debug            => true,
-    agent_mode       => 'dvr_snat',
-  }
-
-  class { '::neutron::agents::dhcp':
-    interface_driver => $driver,
-    debug            => true,
+    agent_mode       => 'dvr',
   }
 }

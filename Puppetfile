@@ -12,10 +12,6 @@ mod "nova",
   :git => "https://github.com/openstack/puppet-nova.git",
   :ref => "stable/ocata"
 
-mod "cinder",
-  :git => "https://github.com/openstack/puppet-cinder.git",
-  :ref => "stable/ocata"
-
 mod "glance",
   :git => "https://github.com/openstack/puppet-glance.git",
   :ref => "stable/ocata"

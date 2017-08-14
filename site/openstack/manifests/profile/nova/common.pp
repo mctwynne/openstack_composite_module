@@ -1,10 +1,10 @@
 class openstack::profile::nova::common {
 
-  $base_url = 'http://192.168.0.10'
+  $base_url = 'http://192.168.70.111'
 
   $transport_url = os_transport_url({
     'transport' => 'rabbit',
-    'host'      => '192.168.0.10',
+    'host'      => '192.168.70.111',
     'username'  => 'nova',
     'password'  => 'an_even_bigger_secret',
   })

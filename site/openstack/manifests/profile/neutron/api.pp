@@ -2,7 +2,7 @@ class openstack::profile::neutron::api {
 
   include ::openstack::profile::neutron::common
 
-  $base_url = 'http://192.168.0.10'
+  $base_url = 'http://192.168.70.111'
   $memcached_servers = '127.0.0.1'
 
   rabbitmq_user { 'neutron':
@@ -47,7 +47,7 @@ class openstack::profile::neutron::api {
     router_distributed  => true,
   }
   class { '::neutron::server::notifications':
-    auth_url => 'http://192.168.0.10:35357/v3',
+    auth_url => 'http://192.168.70.111:35357/v3',
     password => 'a_big_secret',
   }
   class { '::neutron::services::lbaas': }
