@@ -11,9 +11,9 @@ class openstack::profile::nova::common {
 
   class { '::nova':
     default_transport_url         => $transport_url,
-    database_connection           => 'mysql+pymysql://nova:nova@127.0.0.1/nova?charset=utf8',
-    api_database_connection       => 'mysql+pymysql://nova_api:nova@127.0.0.1/nova_api?charset=utf8',
-    placement_database_connection => 'mysql+pymysql://nova_placement:nova@127.0.0.1/nova_placement?charset=utf8',
+    database_connection           => 'mysql+pymysql://nova:nova@192.168.70.11/nova?charset=utf8',
+    api_database_connection       => 'mysql+pymysql://nova_api:nova@192.168.70.111/nova_api?charset=utf8',
+    placement_database_connection => 'mysql+pymysql://nova_placement:nova@192.168.70.111/nova_placement?charset=utf8',
     rabbit_use_ssl                => false,
     glance_api_servers            => "${base_url}:9292",
     debug                         => true,
