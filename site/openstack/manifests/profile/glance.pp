@@ -1,7 +1,7 @@
 class openstack::profile::glance {
 
   $base_url = 'http://192.168.70.111'
-  $memcached_servers = '127.0.0.1'
+  $memcached_servers = '192.168.70.111'
 
   rabbitmq_user { 'glance':
     admin    => true,
@@ -36,7 +36,7 @@ class openstack::profile::glance {
 
   class { '::glance::api':
     debug               => true,
-    database_connection => 'mysql+pymysql://glance:glance@127.0.0.1/glance?charset=utf8',
+    database_connection => 'mysql+pymysql://glance:glance@192.168.70.111/glance?charset=utf8',
     workers             => 2,
     stores              => ['file'],
     default_store       => ['file'],
@@ -55,7 +55,7 @@ class openstack::profile::glance {
   class { '::glance::notify::rabbitmq':
     default_transport_url => os_transport_url({
       'transport' => 'rabbit',
-      'host'      => '127.0.0.1',
+      'host'      => '192.168.70.111',
       'username'  => 'glance',
       'password'  => 'an_even_bigger_secret',
     }),

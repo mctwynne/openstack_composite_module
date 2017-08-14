@@ -3,7 +3,7 @@ class openstack::profile::nova::api {
   $base_url = 'http://192.168.70.111'
   include ::openstack::profile::nova::common
 
-  $memcached_servers = '127.0.0.1'
+  $memcached_servers = '192.168.70.111'
 
   rabbitmq_user { 'nova':
     admin    => true,

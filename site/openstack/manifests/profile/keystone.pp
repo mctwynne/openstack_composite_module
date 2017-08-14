@@ -11,7 +11,7 @@ class openstack::profile::keystone {
 
   class { 'keystone':
   admin_token         => 'random_uuid',
-  database_connection => 'mysql+pymysql://keystone:keystone@127.0.0.1/keystone',
+  database_connection => 'mysql+pymysql://keystone:keystone@192.168.70.111/keystone',
   service_name        => 'httpd',
   }
 

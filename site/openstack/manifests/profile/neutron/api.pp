@@ -3,7 +3,7 @@ class openstack::profile::neutron::api {
   include ::openstack::profile::neutron::common
 
   $base_url = 'http://192.168.70.111'
-  $memcached_servers = '127.0.0.1'
+  $memcached_servers = '192.168.70.111'
 
   rabbitmq_user { 'neutron':
     admin    => true,
@@ -39,7 +39,7 @@ class openstack::profile::neutron::api {
     memcached_servers   => $memcached_servers,
   }
   class { '::neutron::server':
-    database_connection => 'mysql+pymysql://neutron:neutron@127.0.0.1/neutron?charset=utf8',
+    database_connection => 'mysql+pymysql://neutron:neutron@192.168.70.111/neutron?charset=utf8',
     sync_db             => true,
     api_workers         => 2,
     rpc_workers         => 2,
