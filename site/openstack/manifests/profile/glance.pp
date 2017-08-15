@@ -1,7 +1,8 @@
 class openstack::profile::glance {
 
-  $base_url = 'http://192.168.70.111'
-  $memcached_servers = '192.168.70.111'
+  $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
+  $base_url = 'http://${mgmt_ip}'
+  $memcached_servers = $mgmt_ip
 
   rabbitmq_user { 'glance':
     admin    => true,

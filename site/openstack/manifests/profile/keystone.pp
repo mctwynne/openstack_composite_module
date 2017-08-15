@@ -1,13 +1,9 @@
 class openstack::profile::keystone {
 
-  $base_url = 'http://192.168.70.111'
+  $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
+  $base_url = 'http://${mgmt_ip}'
 
   include ::apache
-
-  #  class { '::keystone::cron::fernet_rotate':
-  #    hour           => '*',
-  #    minute         => '*/5',
-  #  }
 
   class { 'keystone':
   admin_token         => 'random_uuid',
@@ -21,11 +17,6 @@ class openstack::profile::keystone {
   }
 
   class { '::keystone::wsgi::apache':
-    # bind_host      => $::openstack_integration::config::ip_for_url,
-    #admin_bind_host => $::openstack_integration::config::ip_for_url,
-    #ssl             => $::openstack_integration::config::ssl,
-    #ssl_key         => "/etc/keystone/ssl/private/${::fqdn}.pem",
-    #ssl_cert        => $::openstack_integration::params::cert_path,
     workers    => 2,
     servername => 'controller',
     ssl        => false,
