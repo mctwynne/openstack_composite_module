@@ -12,7 +12,7 @@ class openstack::profile::neutron::control_agent {
     tunnel_types     => ['vxlan'],
     bridge_mappings  => ['external:br-ex'],
     manage_vswitch   => true,
-    firewall_driver  => 'openvswitch',
+    firewall_driver  => 'iptables_hybrid',
     l2_population    => true,
   }
 

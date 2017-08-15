@@ -3,8 +3,8 @@ class openstack::profile::neutron::common {
   $ip_addr = '192.168.70.111'
   $base_url = 'http://${ip_addr}'
 
-  $driver = ['openvswitch']
-  $firewall_driver  = 'openvswitch'
+  $driver = ['openvswitch', 'l2population']
+  $firewall_driver  = 'iptables_hybrid'
 
   class { '::neutron':
     default_transport_url => os_transport_url({

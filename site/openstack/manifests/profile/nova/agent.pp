@@ -19,7 +19,7 @@ class openstack::profile::nova::agent {
     password => 'a_big_secret',
   }
   class { '::nova::compute::libvirt':
-    libvirt_virt_type     => 'qemu',
+    libvirt_virt_type     => 'kvm',
     libvirt_cpu_mode      => 'none',
     migration_support     => true,
     vncserver_listen      => '0.0.0.0',
