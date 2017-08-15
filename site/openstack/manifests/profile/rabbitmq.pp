@@ -17,7 +17,7 @@ class openstack::profile::rabbitmq {
 
   class { '::rabbitmq':
     service_manage    => false,
-    node_ip_address   => '192.168.70.111'
+    node_ip_address   => '192.168.70.111',
     port              => '5672',
     delete_guest_user => true,
   }

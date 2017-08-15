@@ -20,6 +20,7 @@ class openstack::profile::glance {
 
   class { '::glance::db::mysql':
     password => 'glance',
+    allowed_hosts => '%',
   }
 
   include ::glance

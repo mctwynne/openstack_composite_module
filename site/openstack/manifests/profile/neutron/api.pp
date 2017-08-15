@@ -22,6 +22,7 @@ class openstack::profile::neutron::api {
 
   class { '::neutron::db::mysql':
     password => 'neutron',
+    allowed_hosts => '%',
   }
   class { '::neutron::keystone::auth':
     public_url   => "${base_url}:9696",

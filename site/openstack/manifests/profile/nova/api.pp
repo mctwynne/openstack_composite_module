@@ -22,9 +22,11 @@ class openstack::profile::nova::api {
 
   class { '::nova::db::mysql':
     password => 'nova',
+    allowed_hosts => '%',
   }
   class { '::nova::db::mysql_api':
     password    => 'nova',
+    allowed_hosts => '%',
   }
   class { '::nova::keystone::auth':
     public_url   => "${base_url}:8774/v2.1",
