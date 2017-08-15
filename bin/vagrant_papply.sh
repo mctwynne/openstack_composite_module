@@ -1,6 +1,6 @@
 #!/bin/bash
 
-base_dir='/vagrant/production'
+base_dir='/root/puppet'
 manifest="${base_dir}/manifest/site.pp"
 
 /opt/puppetlabs/bin/puppet apply --test --report --summarize \
