@@ -1,13 +1,16 @@
 class openstack::profile::neutron::compute_agent {
 
   include ::openstack::profile::neutron::common
+  include openstack::profile::common::interfaces
+  $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
 
   $driver         = 'openvswitch'
   $metadata_protocol    = 'http'
+  $controller_mgmt_ip = hiera('controller_mgmt_ip')
 
   class { '::neutron::agents::ml2::ovs':
     enable_tunneling => true,
-    local_ip         => '192.168.70.112',
+    local_ip         => $mgmt_ip,
     enabled          => true,
     tunnel_types     => ['vxlan'],
     bridge_mappings  => ['external:br-ex'],
@@ -22,7 +25,7 @@ class openstack::profile::neutron::compute_agent {
     metadata_workers      => 2,
     metadata_protocol     => $metadata_protocol,
     metadata_insecure     => false,
-    metadata_ip           => '192.168.70.111',
+    metadata_ip           => $controller_mgmt_ip,
   }
 
   class { '::neutron::agents::l3':

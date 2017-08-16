@@ -1,8 +1,10 @@
 class openstack::profile::mysql {
+  include openstack::profile::common::interfaces
+  $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
 
   $override_options = {
     'mysqld' => {
-      'bind-address' => '192.168.70.111'
+      'bind-address' => $mgmt_ip
     }
   }
 

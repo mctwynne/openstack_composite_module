@@ -39,11 +39,11 @@ class openstack::profile::glance {
 
   class { '::glance::api':
     debug               => true,
-    database_connection => 'mysql+pymysql://glance:glance@192.168.70.111/glance?charset=utf8',
+    database_connection => "mysql+pymysql://glance:glance@${mgmt_ip}/glance?charset=utf8",
     workers             => 2,
     stores              => ['file'],
     default_store       => ['file'],
-    bind_host           => '192.168.70.111',
+    bind_host           => $mgmt_ip,
     enable_v1_api       => false,
     enable_v2_api       => true,
   }
@@ -58,11 +58,10 @@ class openstack::profile::glance {
   class { '::glance::notify::rabbitmq':
     default_transport_url => os_transport_url({
       'transport' => 'rabbit',
-      'host'      => '192.168.70.111',
+      'host'      => $mgmt_ip,
       'username'  => 'glance',
       'password'  => 'an_even_bigger_secret',
     }),
     notification_driver   => 'messagingv2',
-    # rabbit_use_ssl        => $::openstack_integration::config::ssl,
   }
 }

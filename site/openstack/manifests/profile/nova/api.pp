@@ -1,9 +1,10 @@
 class openstack::profile::nova::api {
 
-  $base_url = 'http://192.168.70.111'
   include ::openstack::profile::nova::common
-
-  $memcached_servers = '192.168.70.111'
+  include openstack::profile::common::interfaces
+  $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
+  $base_url = "http://${mgmt_ip}"
+  $memcached_servers = $mgmt_ip
 
   rabbitmq_user { 'nova':
     admin    => true,
@@ -49,7 +50,7 @@ class openstack::profile::nova::api {
     password     => 'a_big_secret',
   }
   class { '::nova::api':
-    api_bind_address                     => '192.168.70.111',
+    api_bind_address                     => $mgmt_ip,
     neutron_metadata_proxy_shared_secret => 'a_big_secret',
     metadata_workers                     => 2,
     osapi_compute_workers                => 2,
@@ -58,11 +59,8 @@ class openstack::profile::nova::api {
     install_cinder_client                => false,
   }
   class { '::nova::wsgi::apache_placement':
-    bind_host => '192.168.70.111',
+    bind_host => $mgmt_ip,
     api_port  => '8778',
-    #ssl_key  => "/etc/nova/ssl/private/${::fqdn}.pem",
-    #ssl_cert => $::openstack_integration::params::cert_path,
-    #ssl      => $::openstack_integration::config::ssl,
     ssl       => false,
     workers   => '2',
   }
@@ -76,7 +74,4 @@ class openstack::profile::nova::api {
   class { '::nova::scheduler': }
   class { '::nova::scheduler::filter': }
   class { '::nova::vncproxy': }
-
-  #Keystone_endpoint <||> -> Service['nova-compute']
-  #Keystone_service <||> -> Service['nova-compute']
 }

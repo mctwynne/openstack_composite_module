@@ -1,9 +1,11 @@
 class openstack::profile::neutron::api {
 
   include ::openstack::profile::neutron::common
+  include openstack::profile::common::interfaces
 
-  $base_url = 'http://192.168.70.111'
-  $memcached_servers = '192.168.70.111'
+  $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
+  $base_url = "http://${mgmt_ip}"
+  $memcached_servers = $mgmt_ip
 
   rabbitmq_user { 'neutron':
     admin    => true,
@@ -40,14 +42,14 @@ class openstack::profile::neutron::api {
     memcached_servers   => $memcached_servers,
   }
   class { '::neutron::server':
-    database_connection => 'mysql+pymysql://neutron:neutron@192.168.70.111/neutron?charset=utf8',
+    database_connection => "mysql+pymysql://neutron:neutron@${mgmt_ip}/neutron?charset=utf8",
     sync_db             => true,
     api_workers         => 2,
     rpc_workers         => 2,
     router_distributed  => true,
   }
   class { '::neutron::server::notifications':
-    auth_url => 'http://192.168.70.111:35357/v3',
+    auth_url => "http://${mgmt_ip}:35357/v3",
     password => 'a_big_secret',
   }
 }

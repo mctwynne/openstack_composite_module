@@ -1,18 +1,18 @@
 class openstack::profile::nova::agent {
 
   include ::openstack::profile::nova::common
+  include openstack::profile::common::interfaces
+  $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
 
-  $base_url = 'http://192.168.70.111'
+  $controller_mgmt_ip = hiera('controller_mgmt_ip')
+  $base_url = "http://${controller_mgmt_ip}"
 
   class { '::nova::compute':
-    vncproxy_host                 => '192.168.70.111',
-    vncserver_proxyclient_address => '192.168.70.112',
+    vncproxy_host                 => $controller_mgmt_ip,
+    vncserver_proxyclient_address => $mgmt_ip,
     vnc_enabled                   => true,
     instance_usage_audit          => true,
     instance_usage_audit_period   => 'hour',
-    #keymgr_api_class             => $keymgr_api_class,
-    #barbican_auth_endpoint       => $keymgr_auth_endpoint,
-    #barbican_endpoint            => $barbican_endpoint,
   }
   class { '::nova::placement':
     auth_url => "${base_url}:35357/v3",

@@ -9,3 +9,8 @@ hierarchy:
     path: "nodes/%{trusted.certname}.yaml"
   - name: "Common data"
     path: "common.yaml"
+
+
+# Static IP Addresses to be accessed via Puppet.
+controller_mgmt_ip: '192.168.80.111'
+controller_vxlan_ip: '192.168.81.111'

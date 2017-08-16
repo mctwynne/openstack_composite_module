@@ -1,6 +1,7 @@
 class openstack::profile::neutron::common {
 
-  $ip_addr = '192.168.70.111'
+  $controller_mgmt_ip = hiera('controller_mgmt_ip')
+  $ip_addr = $controller_mgmt_ip
   $base_url = 'http://${ip_addr}'
 
   $driver = ['openvswitch', 'l2population']
