@@ -2,7 +2,7 @@ class openstack::profile::keystone {
 
   include openstack::profile::common::interfaces
   $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
-  $base_url = 'http://${mgmt_ip}'
+  $base_url = "http://${mgmt_ip}"
 
   include ::apache
 
