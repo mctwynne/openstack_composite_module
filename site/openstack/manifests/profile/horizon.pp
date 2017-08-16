@@ -1,5 +1,6 @@
 class openstack::profile::horizon {
 
+  include openstack::profile::common::interfaces
   $mgmt_ip = $openstack::profile::common::interfaces::mgmt_ip
 
   class { '::horizon':
