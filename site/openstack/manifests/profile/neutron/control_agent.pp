@@ -1,6 +1,7 @@
 class openstack::profile::neutron::control_agent {
 
   include ::openstack::profile::neutron::common
+  include openstack::profile::common::interfaces
 
   $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
   $driver         = 'openvswitch'

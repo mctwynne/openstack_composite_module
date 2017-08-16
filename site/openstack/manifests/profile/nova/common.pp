@@ -1,5 +1,6 @@
 class openstack::profile::nova::common {
 
+  include openstack::profile::common::interfaces
   $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
   $base_url = "http://${controller_mgmt_ip}"
 

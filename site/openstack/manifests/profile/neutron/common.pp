@@ -19,6 +19,7 @@ class openstack::profile::neutron::common {
     service_plugins       => ['router'],
     debug                 => true,
     bind_host             => $ip_addr,
+    global_physnet_mtu    => '1450',
   }
 
   class { '::neutron::plugins::ml2':
