@@ -1,6 +1,6 @@
 class openstack::profile::neutron::common {
 
-  $controller_mgmt_ip = hiera('controller_mgmt_ip')
+  $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
   $ip_addr = $controller_mgmt_ip
   $base_url = 'http://${ip_addr}'
 

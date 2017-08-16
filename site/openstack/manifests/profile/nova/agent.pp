@@ -4,7 +4,7 @@ class openstack::profile::nova::agent {
   include openstack::profile::common::interfaces
   $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
 
-  $controller_mgmt_ip = hiera('controller_mgmt_ip')
+  $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
   $base_url = "http://${controller_mgmt_ip}"
 
   class { '::nova::compute':

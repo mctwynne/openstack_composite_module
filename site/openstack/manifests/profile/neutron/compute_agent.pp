@@ -6,7 +6,7 @@ class openstack::profile::neutron::compute_agent {
 
   $driver         = 'openvswitch'
   $metadata_protocol    = 'http'
-  $controller_mgmt_ip = hiera('controller_mgmt_ip')
+  $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
 
   class { '::neutron::agents::ml2::ovs':
     enable_tunneling => true,

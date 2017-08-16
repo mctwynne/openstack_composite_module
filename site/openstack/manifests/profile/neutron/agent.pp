@@ -4,7 +4,7 @@ class openstack::profile::neutron::agent {
   include openstack::profile::common::interfaces
 
   $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
-  $controller_mgmt_ip = hiera('controller_mgmt_ip')
+  $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
   $driver         = 'openvswitch'
   $metadata_protocol    = 'http'
 

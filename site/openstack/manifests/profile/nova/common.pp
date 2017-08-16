@@ -1,6 +1,6 @@
 class openstack::profile::nova::common {
 
-  $controller_mgmt_ip = hiera('controller_mgmt_ip')
+  $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
   $base_url = "http://${controller_mgmt_ip}"
 
   $transport_url = os_transport_url({
