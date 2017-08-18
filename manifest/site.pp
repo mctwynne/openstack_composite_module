@@ -2,10 +2,10 @@
 #   lookup('classes', {merge => unique}).include
 # }
 
-node /^control/ {
+node /control/ {
   include openstack::role::controller
 }
 
-node /^compute/ {
+node /compute/ {
   include openstack::role::compute
 }
