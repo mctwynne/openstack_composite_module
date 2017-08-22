@@ -13,6 +13,7 @@ class openstack::profile::neutron::compute_agent {
     local_ip         => $mgmt_ip,
     enabled          => true,
     tunnel_types     => ['vxlan'],
+    bridge_uplinks   => ['br-ex:ens5'],
     bridge_mappings  => ['external:br-ex'],
     manage_vswitch   => true,
     firewall_driver  => 'iptables_hybrid',
