@@ -24,6 +24,10 @@ mod "openstacklib",
   :git => "https://github.com/openstack/puppet-openstacklib",
   :ref => "stable/ocata"
 
+mod "heat",
+  :git => "https://github.com/openstack/puppet-heat",
+  :ref => "stable/ocata"
+
 mod "openstack_extras",
   :git => "https://github.com/openstack/puppet-openstack_extras",
   :ref => "stable/ocata"

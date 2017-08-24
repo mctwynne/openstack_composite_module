@@ -8,4 +8,5 @@ class openstack::role::controller inherits ::openstack::role {
   -> class {'::openstack::profile::neutron::api': }
   -> class {'::openstack::profile::neutron::control_agent': }
   class {'::openstack::profile::horizon': }
+  class {'::openstack::profile::heat': }
 }
