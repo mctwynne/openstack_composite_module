@@ -55,5 +55,8 @@ class openstack::profile::heat {
 
   class { '::heat::api': }
   class { '::heat::api_cfn': }
-  class { '::heat::engine': }
+
+  class { '::heat::engine':
+    auth_encryption_key => '1234567890AZERTYUIOPMLKJHGFDSQ12',
+  }
 }
