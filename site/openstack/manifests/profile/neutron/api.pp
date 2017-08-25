@@ -46,7 +46,6 @@ class openstack::profile::neutron::api {
     sync_db             => true,
     api_workers         => 2,
     rpc_workers         => 2,
-    router_distributed  => true,
   }
   class { '::neutron::server::notifications':
     auth_url => "http://${mgmt_ip}:35357/v3",
