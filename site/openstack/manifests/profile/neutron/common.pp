@@ -2,10 +2,9 @@ class openstack::profile::neutron::common {
 
   $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
   $ip_addr = $controller_mgmt_ip
-  $base_url = 'http://${ip_addr}'
 
-  $driver = ['openvswitch', 'l2population']
-  $firewall_driver  = 'iptables_hybrid'
+  $driver = ['linuxbridge', 'l2population']
+  $firewall_driver  = 'neutron.agent.linux.iptables_firewall.IptablesFirewallDriver'
 
   class { '::neutron':
     default_transport_url => os_transport_url({

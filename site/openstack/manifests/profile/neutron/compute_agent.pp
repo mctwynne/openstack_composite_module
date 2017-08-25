@@ -4,34 +4,14 @@ class openstack::profile::neutron::compute_agent {
   include openstack::profile::common::interfaces
   $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
 
-  $driver         = 'openvswitch'
+  $driver         = 'linuxbridge'
   $metadata_protocol    = 'http'
   $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
 
-  class { '::neutron::agents::ml2::ovs':
-    enable_tunneling => true,
-    local_ip         => $mgmt_ip,
-    enabled          => true,
-    tunnel_types     => ['vxlan'],
-    bridge_uplinks   => ['br-ex:ens5'],
-    bridge_mappings  => ['external:br-ex'],
-    manage_vswitch   => true,
-    firewall_driver  => 'iptables_hybrid',
-    l2_population    => true,
-  }
-
-  class { '::neutron::agents::metadata':
-    debug                 => true,
-    shared_secret         => 'a_big_secret',
-    metadata_workers      => 2,
-    metadata_protocol     => $metadata_protocol,
-    metadata_insecure     => false,
-    metadata_ip           => $controller_mgmt_ip,
-  }
-
-  class { '::neutron::agents::l3':
-    interface_driver => $driver,
-    debug            => true,
-    agent_mode       => 'dvr',
+  class { '::neutron::agents::ml2::linuxbridge':
+    local_ip                    => $mgmt_ip,
+    tunnel_types                => ['vxlan'],
+    l2_population               => true,
+    physical_interface_mappints => ['external:ens5'],
   }
 }
