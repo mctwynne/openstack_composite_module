@@ -1,6 +1,6 @@
 class openstack::profile::heat {
   include openstack::profile::common::interfaces
-  $mgmt_ip = openstack::profile::common::interfaces::mgmt_ip
+  $mgmt_ip = $openstack::profile::common::interfaces::mgmt_ip
 
 
   rabbitmq_user { 'heat':
