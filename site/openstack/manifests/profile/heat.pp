@@ -24,18 +24,25 @@ class openstack::profile::heat {
     allowed_hosts => '%',
   }
 
+  class { '::heat::keystone::authtoken':
+    password          => 'super_secret',
+    auth_url          => "http://${mgmt_ip}:35357/",
+    auth_uri          => "http://${mgmt_ip}:5000/",
+    memcached_servers => $mgmt_ip,
+  }
+
   class { '::heat::keystone::auth':
     password         => 'super_secret',
-    public_address   => $mgmt_ip,
-    admin_address    => $mgmt_ip,
-    internal_address => $mgmt_ip,
+    public_url   => "http://${mgmt_ip}:8004/v1/%(tenant_id)s",
+    admin_url   => "http://${mgmt_ip}:8004/v1/%(tenant_id)s",
+    internal_url   => "http://${mgmt_ip}:8004/v1/%(tenant_id)s",
   }
 
   class { '::heat::keystone::auth_cfn':
     password         => 'super_secret',
-    public_address   => $mgmt_ip,
-    admin_address    => $mgmt_ip,
-    internal_address => $mgmt_ip,
+    public_url   => "http://${mgmt_ip}:8000/v1",
+    admin_url   => "http://${mgmt_ip}:8000/v1",
+    internal_url   => "http://${mgmt_ip}:8000/v1",
   }
 
   class { '::heat':
