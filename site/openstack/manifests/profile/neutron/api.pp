@@ -43,6 +43,7 @@ class openstack::profile::neutron::api {
   }
   class { '::neutron::server':
     database_connection => "mysql+pymysql://neutron:neutron@${mgmt_ip}/neutron?charset=utf8",
+    service_providers   => ['LOADBALANCERV2:Haproxy:neutron_lbaas.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default'],
     sync_db             => true,
     api_workers         => 2,
     rpc_workers         => 2,
