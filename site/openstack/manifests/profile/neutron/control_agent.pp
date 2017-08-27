@@ -38,4 +38,6 @@ class openstack::profile::neutron::control_agent {
     interface_driver => $driver,
     debug            => true,
   }
+
+  include openstack::profile::neutron::lbaas
 }
