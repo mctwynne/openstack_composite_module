@@ -32,10 +32,17 @@ class openstack::profile::neutron::control_agent {
     interface_driver => $driver,
     debug            => true,
     agent_mode       => 'dvr_snat',
+    extensions       => 'fwaas',
   }
 
   class { '::neutron::agents::dhcp':
     interface_driver => $driver,
     debug            => true,
+  }
+
+  class { '::neutron::services::fwaas':
+    driver        => 'neutron_fwaas.services.firewall.drivers.linux.iptables_fwaas_v2.IptablesFwaasDriver',
+    enabled       => true,
+    agent_version => 'v2',
   }
 }
