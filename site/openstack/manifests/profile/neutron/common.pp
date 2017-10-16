@@ -23,8 +23,8 @@ class openstack::profile::neutron::common {
   }
 
   class { '::neutron::plugins::ml2':
-        type_drivers         => ['vxlan', 'vlan', 'flat'],
-        tenant_network_types => ['vxlan', 'vlan', 'flat'],
+        type_drivers         => ['geneve', 'vxlan', 'vlan', 'flat'],
+        tenant_network_types => ['geneve', 'vxlan', 'vlan', 'flat'],
         extension_drivers    => 'port_security',
         mechanism_drivers    => $driver,
         firewall_driver      => $firewall_driver,
