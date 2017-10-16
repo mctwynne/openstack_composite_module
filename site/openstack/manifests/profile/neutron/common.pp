@@ -31,7 +31,7 @@ class openstack::profile::neutron::common {
   }
 
   class { '::neutron::plugins::ml2::ovn':
-    ovn_nb_connection => $controller_mgmt_ip,
-    ovn_sb_connection => $controller_mgmt_ip,
+    ovn_nb_connection => "tcp:${controller_mgmt_ip}:6441",
+    ovn_sb_connection => "tcp:${controller_mgmt_ip}:6442",
   }
 }
