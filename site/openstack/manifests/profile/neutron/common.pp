@@ -4,7 +4,7 @@ class openstack::profile::neutron::common {
   $ip_addr = $controller_mgmt_ip
   $base_url = 'http://${ip_addr}'
 
-  $driver = ['openvswitch', 'l2population']
+  $driver = ['ovn']
   $firewall_driver  = 'iptables_hybrid'
 
   class { '::neutron':
@@ -16,7 +16,7 @@ class openstack::profile::neutron::common {
       }),
     allow_overlapping_ips => true,
     core_plugin           => 'ml2',
-    service_plugins       => ['router'],
+    service_plugins       => ['networking_ovn.l3.l3_ovn.OVNL3RouterPlugin'],
     debug                 => true,
     bind_host             => $ip_addr,
     global_physnet_mtu    => '1450',
@@ -28,5 +28,10 @@ class openstack::profile::neutron::common {
         extension_drivers    => 'port_security',
         mechanism_drivers    => $driver,
         firewall_driver      => $firewall_driver,
+  }
+
+  class { '::neutron::plugins::ml2::ovn':
+    ovn_nb_connection => $controller_mgmt_ip,
+    ovn_sb_connection => $controller_mgmt_ip,
   }
 }
