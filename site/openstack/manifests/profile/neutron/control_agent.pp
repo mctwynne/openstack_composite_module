@@ -15,7 +15,7 @@ class openstack::profile::neutron::control_agent {
     bridge_uplinks   => ['br-ex:ens5'],
     bridge_mappings  => ['external:br-ex'],
     manage_vswitch   => true,
-    firewall_driver  => 'iptables_hybrid',
+    firewall_driver  => 'openvswitch',
     l2_population    => true,
   }
 
