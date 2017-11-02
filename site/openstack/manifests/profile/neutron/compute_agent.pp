@@ -12,6 +12,6 @@ class openstack::profile::neutron::compute_agent {
     local_ip                    => $mgmt_ip,
     tunnel_types                => ['vxlan'],
     l2_population               => true,
-    physical_interface_mappints => ['external:ens5'],
+    physical_interface_mappings => ['external:ens5'],
   }
 }
