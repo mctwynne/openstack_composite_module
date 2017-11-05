@@ -13,7 +13,7 @@ class openstack::profile::keystone {
   }
 
   class { 'keystone::db::mysql':
-    password      => 'keystone',
+    password      => 'super_secret',
     allowed_hosts => '%',
   }
 
@@ -73,7 +73,7 @@ class openstack::profile::keystone {
   }
   keystone_user { 'demo::demodomain':
     ensure   => present,
-    password => 'abc123',
+    password => 'super_secret',
     domain   => 'demodomain',
   }
   keystone_user_role { 'demo::demodomain@demo::demodomain':

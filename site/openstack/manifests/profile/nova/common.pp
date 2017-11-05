@@ -8,7 +8,7 @@ class openstack::profile::nova::common {
     'transport' => 'rabbit',
     'host'      => $controller_mgmt_ip,
     'username'  => 'nova',
-    'password'  => 'an_even_bigger_secret',
+    'password'  => 'super_secret',
   })
 
   class { '::nova':
@@ -25,6 +25,6 @@ class openstack::profile::nova::common {
   class { '::nova::network::neutron':
     neutron_auth_url => "${base_url}:35357/v3",
     neutron_url      => "${base_url}:9696",
-    neutron_password => 'a_big_secret',
+    neutron_password => 'super_secret',
   }
 }

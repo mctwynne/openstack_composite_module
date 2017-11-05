@@ -7,7 +7,7 @@ class openstack::profile::glance {
 
   rabbitmq_user { 'glance':
     admin    => true,
-    password => 'an_even_bigger_secret',
+    password => 'super_secret',
     provider => 'rabbitmqctl',
     require  => Class['::rabbitmq'],
   }
@@ -21,7 +21,7 @@ class openstack::profile::glance {
   }
 
   class { '::glance::db::mysql':
-    password => 'glance',
+    password => 'super_secret',
     allowed_hosts => '%',
   }
 
@@ -29,7 +29,7 @@ class openstack::profile::glance {
   include ::glance::client
 
   class { '::glance::api::authtoken':
-    password            => 'a_big_secret',
+    password            => 'super_secret',
     user_domain_name    => 'Default',
     project_domain_name => 'Default',
     auth_url            => "${base_url}:35357/v3",
@@ -52,7 +52,7 @@ class openstack::profile::glance {
     public_url   => "${base_url}:9292",
     internal_url => "${base_url}:9292",
     admin_url    => "${base_url}:9292",
-    password     => 'a_big_secret',
+    password     => 'super_secret',
   }
 
   class { '::glance::notify::rabbitmq':
@@ -60,7 +60,7 @@ class openstack::profile::glance {
       'transport' => 'rabbit',
       'host'      => $mgmt_ip,
       'username'  => 'glance',
-      'password'  => 'an_even_bigger_secret',
+      'password'  => 'super_secret',
     }),
     notification_driver   => 'messagingv2',
   }
