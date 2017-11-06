@@ -8,7 +8,7 @@ class openstack::profile::keystone {
 
   class { 'keystone':
   admin_token         => 'random_uuid',
-  database_connection => "mysql+pymysql://keystone:keystone@${mgmt_ip}/keystone",
+  database_connection => "mysql+pymysql://keystone:super_secret@${mgmt_ip}/keystone",
   service_name        => 'httpd',
   }
 

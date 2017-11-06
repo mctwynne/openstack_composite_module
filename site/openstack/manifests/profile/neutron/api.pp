@@ -42,7 +42,7 @@ class openstack::profile::neutron::api {
     memcached_servers   => $memcached_servers,
   }
   class { '::neutron::server':
-    database_connection => "mysql+pymysql://neutron:neutron@${mgmt_ip}/neutron?charset=utf8",
+    database_connection => "mysql+pymysql://neutron:super_secret@${mgmt_ip}/neutron?charset=utf8",
     sync_db             => true,
     router_distributed  => true,
   }
