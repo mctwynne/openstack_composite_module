@@ -40,7 +40,6 @@ class openstack::profile::glance {
   class { '::glance::api':
     debug               => true,
     database_connection => "mysql+pymysql://glance:super_secret@${mgmt_ip}/glance?charset=utf8",
-    workers             => 2,
     stores              => ['file'],
     default_store       => ['file'],
     bind_host           => $mgmt_ip,

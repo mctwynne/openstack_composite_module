@@ -18,7 +18,6 @@ class openstack::profile::keystone {
   }
 
   class { '::keystone::wsgi::apache':
-    workers    => 2,
     servername => 'controller',
     ssl        => false,
   }

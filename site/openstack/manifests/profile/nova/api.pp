@@ -52,8 +52,6 @@ class openstack::profile::nova::api {
   class { '::nova::api':
     api_bind_address                     => $mgmt_ip,
     neutron_metadata_proxy_shared_secret => 'a_big_secret',
-    metadata_workers                     => 2,
-    osapi_compute_workers                => 2,
     default_floating_pool                => 'public',
     sync_db_api                          => true,
     install_cinder_client                => false,
@@ -62,7 +60,6 @@ class openstack::profile::nova::api {
     bind_host => $mgmt_ip,
     api_port  => '8778',
     ssl       => false,
-    workers   => '2',
   }
   class { '::nova::placement':
     auth_url => "${base_url}:35357/v3",
