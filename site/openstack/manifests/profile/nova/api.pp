@@ -8,7 +8,7 @@ class openstack::profile::nova::api {
 
   rabbitmq_user { 'nova':
     admin    => true,
-    password => 'an_even_bigger_secret',
+    password => 'super_secret',
     provider => 'rabbitmqctl',
     require  => Class['::rabbitmq'],
   }
@@ -22,21 +22,21 @@ class openstack::profile::nova::api {
   Rabbitmq_user_permissions['nova@/'] -> Service<| tag == 'nova-service' |>
 
   class { '::nova::db::mysql':
-    password => 'nova',
+    password => 'super_secret',
     allowed_hosts => '%',
   }
   class { '::nova::db::mysql_api':
-    password    => 'nova',
+    password    => 'super_secret',
     allowed_hosts => '%',
   }
   class { '::nova::keystone::auth':
     public_url   => "${base_url}:8774/v2.1",
     internal_url => "${base_url}:8774/v2.1",
     admin_url    => "${base_url}:8774/v2.1",
-    password     => 'a_big_secret',
+    password     => 'super_secret',
   }
   class { '::nova::keystone::authtoken':
-    password            => 'a_big_secret',
+    password            => 'super_secret',
     user_domain_name    => 'Default',
     project_domain_name => 'Default',
     auth_url            => "${base_url}:35357/v3",
@@ -47,13 +47,11 @@ class openstack::profile::nova::api {
     public_url   => "${base_url}:8778/placement",
     internal_url => "${base_url}:8778/placement",
     admin_url    => "${base_url}:8778/placement",
-    password     => 'a_big_secret',
+    password     => 'super_secret',
   }
   class { '::nova::api':
     api_bind_address                     => $mgmt_ip,
     neutron_metadata_proxy_shared_secret => 'a_big_secret',
-    metadata_workers                     => 2,
-    osapi_compute_workers                => 2,
     default_floating_pool                => 'public',
     sync_db_api                          => true,
     install_cinder_client                => false,
@@ -62,11 +60,10 @@ class openstack::profile::nova::api {
     bind_host => $mgmt_ip,
     api_port  => '8778',
     ssl       => false,
-    workers   => '2',
   }
   class { '::nova::placement':
     auth_url => "${base_url}:35357/v3",
-    password => 'a_big_secret',
+    password => 'super_secret',
   }
   class { '::nova::conductor': }
   class { '::nova::consoleauth': }

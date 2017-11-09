@@ -2,7 +2,7 @@ class openstack::profile::neutron::compute_agent {
 
   include ::openstack::profile::neutron::common
   include openstack::profile::common::interfaces
-  $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
+  $tnl_ip  = $openstack::profile::common::interfaces::tnl_ip
 
   $driver         = 'openvswitch'
   $metadata_protocol    = 'http'
@@ -10,7 +10,7 @@ class openstack::profile::neutron::compute_agent {
 
   class { '::neutron::agents::ml2::ovs':
     enable_tunneling => true,
-    local_ip         => $mgmt_ip,
+    local_ip         => $tnl_ip,
     enabled          => true,
     tunnel_types     => ['vxlan'],
     bridge_uplinks   => ['br-ex:ens5'],
@@ -23,7 +23,6 @@ class openstack::profile::neutron::compute_agent {
   class { '::neutron::agents::metadata':
     debug                 => true,
     shared_secret         => 'a_big_secret',
-    metadata_workers      => 2,
     metadata_protocol     => $metadata_protocol,
     metadata_insecure     => false,
     metadata_ip           => $controller_mgmt_ip,

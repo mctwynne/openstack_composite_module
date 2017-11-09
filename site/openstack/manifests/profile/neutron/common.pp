@@ -12,7 +12,7 @@ class openstack::profile::neutron::common {
       'transport' => 'rabbit',
       'host'      => $ip_addr,
       'username'  => 'neutron',
-      'password'  => 'an_even_bigger_secret',
+      'password'  => 'super_secret',
       }),
     allow_overlapping_ips => true,
     core_plugin           => 'ml2',
@@ -24,7 +24,7 @@ class openstack::profile::neutron::common {
 
   class { '::neutron::plugins::ml2':
         type_drivers         => ['vxlan', 'vlan', 'flat'],
-        tenant_network_types => ['vxlan', 'vlan', 'flat'],
+        tenant_network_types => ['vxlan'],
         extension_drivers    => 'port_security',
         mechanism_drivers    => $driver,
         firewall_driver      => $firewall_driver,
