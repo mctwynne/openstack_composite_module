@@ -1,6 +1,6 @@
 class openstack::profile::neutron::api {
 
-  include ::openstack::profile::neutron::common
+  require ::openstack::profile::neutron::common
   include openstack::profile::common::interfaces
 
   $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
@@ -28,8 +28,6 @@ class openstack::profile::neutron::api {
     require       => Class['::mysql::server'],
   }
 
-  Class['::neutron::db::mysql'] -> Exec['neutron-db-sync']
-
   class { '::neutron::keystone::auth':
     public_url   => "${base_url}:9696",
     internal_url => "${base_url}:9696",
@@ -54,4 +52,8 @@ class openstack::profile::neutron::api {
     auth_url => "http://${mgmt_ip}:35357/v3",
     password => 'super_secret',
   }
+
+  #Class['::neutron::db::mysql'] -> Class['::openstack::profile::neutron::common']
+  Class['::neutron::db::mysql'] -> Class['::neutron::server']
+  Class['::neutron::db::mysql'] -> Exec['neutron-db-sync']
 }

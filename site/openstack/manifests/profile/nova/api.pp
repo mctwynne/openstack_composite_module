@@ -1,6 +1,6 @@
 class openstack::profile::nova::api {
 
-  include ::openstack::profile::nova::common
+  require ::openstack::profile::nova::common
   include openstack::profile::common::interfaces
   $mgmt_ip  = $openstack::profile::common::interfaces::mgmt_ip
   $base_url = "http://${mgmt_ip}"
@@ -60,6 +60,7 @@ class openstack::profile::nova::api {
     install_cinder_client                => false,
   }
 
+  #Class['::nova::db::mysql'] -> Class['::openstack::profile::nova::common']
   Class['::nova::db::mysql'] -> Exec['nova-db-sync']
   Class['::nova::db::mysql_api'] -> Exec['nova-db-sync-api']
 
