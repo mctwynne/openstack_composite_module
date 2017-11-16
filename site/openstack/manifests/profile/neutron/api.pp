@@ -27,6 +27,9 @@ class openstack::profile::neutron::api {
     allowed_hosts => '%',
     require       => Class['::mysql::server'],
   }
+
+  Class['::neutron::db::mysql'] -> Exec['neutron-db-sync']
+
   class { '::neutron::keystone::auth':
     public_url   => "${base_url}:9696",
     internal_url => "${base_url}:9696",

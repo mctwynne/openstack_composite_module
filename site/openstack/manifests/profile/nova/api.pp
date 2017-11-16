@@ -59,6 +59,9 @@ class openstack::profile::nova::api {
     sync_db_api                          => true,
     install_cinder_client                => false,
   }
+
+  Class['::nova::db::mysql'] -> Class['::nova::db::mysql_api'] -> Exec['nova-db-sync'] -> Exec['nova-db-sync-api']
+
   class { '::nova::wsgi::apache_placement':
     bind_host => $mgmt_ip,
     api_port  => '8778',
