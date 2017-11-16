@@ -7,14 +7,15 @@ class openstack::profile::keystone {
   include ::apache
 
   class { 'keystone':
-  admin_token         => 'random_uuid',
-  database_connection => "mysql+pymysql://keystone:super_secret@${mgmt_ip}/keystone",
-  service_name        => 'httpd',
+    admin_token         => 'random_uuid',
+    database_connection => "mysql+pymysql://keystone:super_secret@${mgmt_ip}/keystone",
+    service_name        => 'httpd',
   }
 
   class { 'keystone::db::mysql':
     password      => 'super_secret',
     allowed_hosts => '%',
+    require       => Class['::mysql::server'],
   }
 
   class { '::keystone::wsgi::apache':

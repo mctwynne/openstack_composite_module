@@ -23,8 +23,9 @@ class openstack::profile::neutron::api {
   Rabbitmq_user_permissions['neutron@/'] -> Service<| tag == 'neutron-service' |>
 
   class { '::neutron::db::mysql':
-    password => 'super_secret',
+    password      => 'super_secret',
     allowed_hosts => '%',
+    require       => Class['::mysql::server'],
   }
   class { '::neutron::keystone::auth':
     public_url   => "${base_url}:9696",
@@ -45,6 +46,7 @@ class openstack::profile::neutron::api {
     database_connection => "mysql+pymysql://neutron:super_secret@${mgmt_ip}/neutron?charset=utf8",
     sync_db             => true,
     router_distributed  => true,
+    require       => [Class['::mysql::server'], Class['::neutron::db::mysql'],],
   }
   class { '::neutron::server::notifications':
     auth_url => "http://${mgmt_ip}:35357/v3",

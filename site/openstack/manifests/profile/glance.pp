@@ -21,8 +21,9 @@ class openstack::profile::glance {
   }
 
   class { '::glance::db::mysql':
-    password => 'super_secret',
+    password      => 'super_secret',
     allowed_hosts => '%',
+    require       => Class['::mysql::server'],
   }
 
   include ::glance
@@ -45,6 +46,7 @@ class openstack::profile::glance {
     bind_host           => $mgmt_ip,
     enable_v1_api       => false,
     enable_v2_api       => true,
+    require             => Class['::glance::db::mysql'],
   }
 
   class { '::glance::keystone::auth':

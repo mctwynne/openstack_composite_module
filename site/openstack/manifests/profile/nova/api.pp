@@ -17,17 +17,20 @@ class openstack::profile::nova::api {
     write_permission     => '.*',
     read_permission      => '.*',
     provider             => 'rabbitmqctl',
-    require              => Class['::rabbitmq'],
+    # FIXME: Does this work? Should I be doing this elsewhere as well?
+    require              => [Class['::rabbitmq'], Rabbitmq_user['nova'],],
   }
   Rabbitmq_user_permissions['nova@/'] -> Service<| tag == 'nova-service' |>
 
   class { '::nova::db::mysql':
-    password => 'super_secret',
+    password      => 'super_secret',
     allowed_hosts => '%',
+    require       => Class['::mysql::server'],
   }
   class { '::nova::db::mysql_api':
-    password    => 'super_secret',
+    password      => 'super_secret',
     allowed_hosts => '%',
+    require       => Class['::mysql::server'],
   }
   class { '::nova::keystone::auth':
     public_url   => "${base_url}:8774/v2.1",
@@ -55,6 +58,7 @@ class openstack::profile::nova::api {
     default_floating_pool                => 'public',
     sync_db_api                          => true,
     install_cinder_client                => false,
+    require                              => [Class['::nova::db::mysql_api'], Class['::nova::db::mysql'],],
   }
   class { '::nova::wsgi::apache_placement':
     bind_host => $mgmt_ip,

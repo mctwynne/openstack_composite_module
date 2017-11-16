@@ -22,6 +22,7 @@ class openstack::profile::heat {
     password      => 'super_secret',
     host          => $mgmt_ip,
     allowed_hosts => '%',
+    require       => Class['::mysql::server'],
   }
 
   class { '::heat::keystone::authtoken':
@@ -51,6 +52,7 @@ class openstack::profile::heat {
     rabbit_userid       => 'heat',
     rabbit_password     => 'super_secret',
     debug               => true,
+    require             => '::heat::db::mysql',
   }
 
   class { '::heat::api': }
