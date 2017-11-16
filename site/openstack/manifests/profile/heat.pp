@@ -52,7 +52,7 @@ class openstack::profile::heat {
     rabbit_userid       => 'heat',
     rabbit_password     => 'super_secret',
     debug               => true,
-    require             => '::heat::db::mysql',
+    require             => Class['::heat::db::mysql'],
   }
 
   class { '::heat::api': }
