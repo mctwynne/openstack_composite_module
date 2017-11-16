@@ -54,6 +54,5 @@ class openstack::profile::neutron::api {
   }
 
   #Class['::neutron::db::mysql'] -> Class['::openstack::profile::neutron::common']
-  Class['::neutron::db::mysql'] -> Class['::neutron::server']
   Class['::neutron::db::mysql'] -> Exec['neutron-db-sync']
 }
