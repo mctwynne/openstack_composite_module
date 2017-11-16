@@ -55,7 +55,6 @@ class openstack::profile::heat {
   }
 
   class { '::heat::api': }
-  Class['::heat::db::mysql'] -> Class['::heat::api']
   class { '::heat::api_cfn': }
 
   class { '::heat::engine':
