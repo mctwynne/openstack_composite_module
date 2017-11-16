@@ -58,7 +58,6 @@ class openstack::profile::nova::api {
     default_floating_pool                => 'public',
     sync_db_api                          => true,
     install_cinder_client                => false,
-    require                              => [Class['::nova::db::mysql_api'], Class['::nova::db::mysql'],],
   }
   class { '::nova::wsgi::apache_placement':
     bind_host => $mgmt_ip,

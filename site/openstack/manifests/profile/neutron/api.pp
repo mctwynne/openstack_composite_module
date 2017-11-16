@@ -46,7 +46,6 @@ class openstack::profile::neutron::api {
     database_connection => "mysql+pymysql://neutron:super_secret@${mgmt_ip}/neutron?charset=utf8",
     sync_db             => true,
     router_distributed  => true,
-    require       => [Class['::mysql::server'], Class['::neutron::db::mysql'],],
   }
   class { '::neutron::server::notifications':
     auth_url => "http://${mgmt_ip}:35357/v3",

@@ -46,7 +46,6 @@ class openstack::profile::glance {
     bind_host           => $mgmt_ip,
     enable_v1_api       => false,
     enable_v2_api       => true,
-    require             => Class['::glance::db::mysql'],
   }
 
   class { '::glance::keystone::auth':
