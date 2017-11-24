@@ -82,3 +82,7 @@ mod 'rabbitmq',
 mod 'vswitch',
   :git => 'https://github.com/openstack/puppet-vswitch.git',
   :ref => '6.3.1'
+
+mod "ovn",
+  :git => "https://github.com/openstack/puppet-ovn",
+  :ref => "stable/ocata"

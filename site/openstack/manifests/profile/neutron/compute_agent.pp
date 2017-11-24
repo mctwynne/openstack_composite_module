@@ -34,4 +34,11 @@ class openstack::profile::neutron::compute_agent {
   #   debug            => true,
   #   agent_mode       => 'dvr',
   # }
+
+  class { '::ovn::controller':
+    ovn_remote                => $controller_mgmt_ip,
+    ovn_encap_ip              => $mgmt_ip,
+    ovn_bridge_mappings       => ['external:br-ex'],
+    bridge_interface_mappings => ['br-ex:ens5'],
+  }
 }

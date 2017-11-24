@@ -49,4 +49,8 @@ class openstack::profile::neutron::control_agent {
   neutron_plugin_ml2 {
     'ovn/ovn_l3_scheduler' : value => 'chance';
   }
+
+  class { '::ovn::northd':
+    dbs_listen_up => $controller_mgmt_ip,
+  }
 }
