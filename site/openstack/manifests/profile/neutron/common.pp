@@ -29,6 +29,6 @@ class openstack::profile::neutron::common {
     extension_drivers    => 'port_security',
     mechanism_drivers    => $driver,
     firewall_driver      => $firewall_driver,
-    overlay_ip_version   => '4',
+    overlay_ip_version   => 4,
   }
 }
