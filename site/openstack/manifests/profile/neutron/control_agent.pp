@@ -51,6 +51,6 @@ class openstack::profile::neutron::control_agent {
   }
 
   class { '::ovn::northd':
-    dbs_listen_up => $controller_mgmt_ip,
+    dbs_listen_ip => $controller_mgmt_ip,
   }
 }
