@@ -15,7 +15,7 @@ class openstack::profile::neutron::common {
       'password'  => 'an_even_bigger_secret',
       }),
     allow_overlapping_ips => true,
-    core_plugin           => 'ml2',
+    core_plugin           => 'neutron.plugins.ml2.plugin.Ml2Plugin',
     service_plugins       => ['networking_ovn.l3.l3_ovn.OVNL3RouterPlugin'],
     debug                 => true,
     bind_host             => $ip_addr,
@@ -23,16 +23,23 @@ class openstack::profile::neutron::common {
   }
 
   class { '::neutron::plugins::ml2':
-        type_drivers         => ['geneve', 'vxlan', 'vlan', 'flat'],
-        tenant_network_types => ['geneve', 'vxlan', 'vlan', 'flat'],
-        vni_ranges           => ['1:5000'],
-        extension_drivers    => 'port_security',
-        mechanism_drivers    => $driver,
-        firewall_driver      => $firewall_driver,
+    type_drivers         => ['geneve', 'vxlan', 'vlan', 'flat'],
+    tenant_network_types => ['geneve', 'vxlan', 'vlan', 'flat'],
+    vni_ranges           => ['1:5000'],
+    extension_drivers    => 'port_security',
+    mechanism_drivers    => $driver,
+    firewall_driver      => $firewall_driver,
+    overlay_ip_version   => '4',
   }
 
   class { '::neutron::plugins::ml2::ovn':
     ovn_nb_connection => "tcp:${controller_mgmt_ip}:6441",
     ovn_sb_connection => "tcp:${controller_mgmt_ip}:6442",
+  }
+
+  # This isn't available in ::neutron::plugins::ml2::ovn
+  # for some reason. Add it manually for now.
+  neutron_plugin_ml2 {
+    'ovn/ovn_l3_scheduler' : value => 'chance';
   }
 }
