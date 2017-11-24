@@ -40,8 +40,8 @@ class openstack::profile::neutron::control_agent {
   # }
 
   class { '::neutron::plugins::ml2::ovn':
-    ovn_nb_connection => "tcp:${controller_mgmt_ip}:6441",
-    ovn_sb_connection => "tcp:${controller_mgmt_ip}:6442",
+    ovn_nb_connection => "tcp:${controller_mgmt_ip}:6641",
+    ovn_sb_connection => "tcp:${controller_mgmt_ip}:6642",
   }
 
   # This isn't available in ::neutron::plugins::ml2::ovn
