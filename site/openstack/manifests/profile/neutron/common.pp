@@ -31,15 +31,4 @@ class openstack::profile::neutron::common {
     firewall_driver      => $firewall_driver,
     overlay_ip_version   => '4',
   }
-
-  class { '::neutron::plugins::ml2::ovn':
-    ovn_nb_connection => "tcp:${controller_mgmt_ip}:6441",
-    ovn_sb_connection => "tcp:${controller_mgmt_ip}:6442",
-  }
-
-  # This isn't available in ::neutron::plugins::ml2::ovn
-  # for some reason. Add it manually for now.
-  neutron_plugin_ml2 {
-    'ovn/ovn_l3_scheduler' : value => 'chance';
-  }
 }
