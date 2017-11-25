@@ -9,7 +9,7 @@ class openstack::profile::neutron::api {
 
   rabbitmq_user { 'neutron':
     admin    => true,
-    password => 'an_even_bigger_secret',
+    password => 'super_secret',
     provider => 'rabbitmqctl',
     require  => Class['::rabbitmq'],
   }
@@ -23,18 +23,18 @@ class openstack::profile::neutron::api {
   Rabbitmq_user_permissions['neutron@/'] -> Service<| tag == 'neutron-service' |>
 
   class { '::neutron::db::mysql':
-    password => 'neutron',
+    password => 'super_secret',
     allowed_hosts => '%',
   }
   class { '::neutron::keystone::auth':
     public_url   => "${base_url}:9696",
     internal_url => "${base_url}:9696",
     admin_url    => "${base_url}:9696",
-    password     => 'a_big_secret',
+    password     => 'super_secret',
   }
   class { '::neutron::client': }
   class { '::neutron::keystone::authtoken':
-    password            => 'a_big_secret',
+    password            => 'super_secret',
     user_domain_name    => 'Default',
     project_domain_name => 'Default',
     auth_url            => "${base_url}:35357/v3",
@@ -42,14 +42,11 @@ class openstack::profile::neutron::api {
     memcached_servers   => $memcached_servers,
   }
   class { '::neutron::server':
-    database_connection => "mysql+pymysql://neutron:neutron@${mgmt_ip}/neutron?charset=utf8",
+    database_connection => "mysql+pymysql://neutron:super_secret@${mgmt_ip}/neutron?charset=utf8",
     sync_db             => true,
-    api_workers         => 2,
-    rpc_workers         => 2,
-    router_distributed  => true,
   }
   class { '::neutron::server::notifications':
     auth_url => "http://${mgmt_ip}:35357/v3",
-    password => 'a_big_secret',
+    password => 'super_secret',
   }
 }

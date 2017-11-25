@@ -16,7 +16,7 @@ class openstack::profile::nova::agent {
   }
   class { '::nova::placement':
     auth_url => "${base_url}:35357/v3",
-    password => 'a_big_secret',
+    password => 'super_secret',
   }
   class { '::nova::compute::libvirt':
     libvirt_virt_type     => 'kvm',

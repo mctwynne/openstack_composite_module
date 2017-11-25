@@ -8,17 +8,16 @@ class openstack::profile::keystone {
 
   class { 'keystone':
   admin_token         => 'random_uuid',
-  database_connection => "mysql+pymysql://keystone:keystone@${mgmt_ip}/keystone",
+  database_connection => "mysql+pymysql://keystone:super_secret@${mgmt_ip}/keystone",
   service_name        => 'httpd',
   }
 
   class { 'keystone::db::mysql':
-    password      => 'keystone',
+    password      => 'super_secret',
     allowed_hosts => '%',
   }
 
   class { '::keystone::wsgi::apache':
-    workers    => 2,
     servername => 'controller',
     ssl        => false,
   }
@@ -73,7 +72,7 @@ class openstack::profile::keystone {
   }
   keystone_user { 'demo::demodomain':
     ensure   => present,
-    password => 'abc123',
+    password => 'super_secret',
     domain   => 'demodomain',
   }
   keystone_user_role { 'demo::demodomain@demo::demodomain':
