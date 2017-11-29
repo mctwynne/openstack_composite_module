@@ -6,13 +6,13 @@ class openstack::profile::rabbitmq {
 
   packagecloud::repo { 'rabbitmq/rabbitmq-server':
     type => 'deb',
-  }
+  }->
 
   apt::pin { 'rabbitmq-server':
     packages => 'rabbitmq-server',
     priority => 1000,
     version  => '3.6.13',
-  }
+  }->
 
   class { '::rabbitmq':
     service_manage    => false,
