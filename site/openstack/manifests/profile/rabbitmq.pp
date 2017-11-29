@@ -8,6 +8,12 @@ class openstack::profile::rabbitmq {
     type => 'deb',
   }
 
+  apt::pin { 'rabbitmq-server':
+    packages => 'rabbitmq-server',
+    priority => 1000,
+    version  => '3.6.13',
+  }
+
   class { '::rabbitmq':
     service_manage    => false,
     node_ip_address   => $mgmt_ip,
