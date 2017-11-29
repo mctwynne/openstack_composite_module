@@ -16,7 +16,7 @@ class openstack::profile::neutron::common {
       }),
     allow_overlapping_ips => true,
     core_plugin           => 'ml2',
-    service_plugins       => ['router'],
+    service_plugins       => ['router', 'neutron_lbaas.services.loadbalancer.plugin.LoadBalancerPluginv2'],
     debug                 => true,
     bind_host             => $ip_addr,
     global_physnet_mtu    => '1450',
