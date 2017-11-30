@@ -11,7 +11,7 @@ class openstack::profile::rabbitmq {
   apt::pin { 'rabbitmq-server':
     packages => 'rabbitmq-server',
     priority => 1000,
-    version  => '3.6.13-1',
+    version  => '3.6.14-1',
   }->
 
   class { '::rabbitmq':
