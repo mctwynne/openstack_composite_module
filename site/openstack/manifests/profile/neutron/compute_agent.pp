@@ -12,7 +12,7 @@ class openstack::profile::neutron::compute_agent {
     enable_tunneling => true,
     local_ip         => $tnl_ip,
     enabled          => true,
-    tunnel_types     => ['vxlan', 'gre', 'geneve', 'vlan'],
+    tunnel_types     => ['vxlan', 'gre', 'geneve'],
     bridge_uplinks   => ['br-ex:ens5'],
     bridge_mappings  => ['external:br-ex'],
     manage_vswitch   => true,
