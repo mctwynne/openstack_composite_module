@@ -11,7 +11,7 @@ class openstack::profile::rabbitmq {
     release  => 'xenial',
     repos    => 'contrib',
     key      => {
-      id     => '',
+      id     => '434975BD900CCBE4F7EE1B1ED208507CA14F4FCA',
       server => 'hkps.pool.sks-keyservers.net',
     },
   }
@@ -28,7 +28,6 @@ class openstack::profile::rabbitmq {
     node_ip_address   => $mgmt_ip,
     port              => '5672',
     delete_guest_user => true,
-    require           => Apt::Pin['rabbitmq-server'],
-    require           => Apt::Source['erlang'],
+    require           => [Apt::Pin['rabbitmq-server'], Apt::Source['erlang'],],
   }
 }
