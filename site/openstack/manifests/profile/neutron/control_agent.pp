@@ -9,15 +9,16 @@ class openstack::profile::neutron::control_agent {
   $metadata_protocol    = 'http'
 
   class { '::neutron::agents::ml2::ovs':
-    enable_tunneling => true,
-    local_ip         => $tnl_ip,
-    enabled          => true,
-    tunnel_types     => ['vxlan', 'gre', 'geneve'],
-    bridge_uplinks   => ['br-ex:ens5'],
-    bridge_mappings  => ['external:br-ex'],
-    manage_vswitch   => true,
-    firewall_driver  => 'openvswitch',
-    l2_population    => true,
+    enable_tunneling           => true,
+    local_ip                   => $tnl_ip,
+    enabled                    => true,
+    tunnel_types               => ['vxlan', 'gre', 'geneve'],
+    bridge_uplinks             => ['br-ex:ens5'],
+    bridge_mappings            => ['external:br-ex'],
+    manage_vswitch             => true,
+    firewall_driver            => 'openvswitch',
+    l2_population              => true,
+    enable_distributed_routing => true,
   }
 
   class { '::neutron::agents::metadata':
