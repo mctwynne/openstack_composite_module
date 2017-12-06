@@ -7,9 +7,12 @@ class openstack::profile::keystone {
   include ::apache
 
   class { 'keystone':
-  admin_token         => 'random_uuid',
-  database_connection => "mysql+pymysql://keystone:super_secret@${mgmt_ip}/keystone",
-  service_name        => 'httpd',
+    admin_token            => 'random_uuid',
+    database_connection    => "mysql+pymysql://keystone:super_secret@${mgmt_ip}/keystone",
+    service_name           => 'httpd',
+    cache_enabled          => true,
+    cache_backend          => 'dogpile.cache.memcached',
+    cache_memcache_servers => ['127.0.0.1:11211'],
   }
 
   class { 'keystone::db::mysql':
