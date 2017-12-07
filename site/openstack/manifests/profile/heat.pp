@@ -50,7 +50,7 @@ class openstack::profile::heat {
     rabbit_host         => $mgmt_ip,
     rabbit_userid       => 'heat',
     rabbit_password     => 'super_secret',
-    debug               => true,
+    debug               => $openstack::config::debug,
   }
 
   class { '::heat::api': }

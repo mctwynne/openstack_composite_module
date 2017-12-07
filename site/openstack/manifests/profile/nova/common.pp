@@ -18,7 +18,7 @@ class openstack::profile::nova::common {
     placement_database_connection => "mysql+pymysql://nova_placement:super_secret@${controller_mgmt_ip}/nova_placement?charset=utf8",
     rabbit_use_ssl                => false,
     glance_api_servers            => "${base_url}:9292",
-    debug                         => true,
+    debug                         => $openstack::config::debug,
     notification_driver           => 'messagingv2',
     notify_on_state_change        => 'vm_and_task_state',
   }

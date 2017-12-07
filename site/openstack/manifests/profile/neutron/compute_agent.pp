@@ -18,7 +18,7 @@ class openstack::profile::neutron::compute_agent {
   }
 
   class { '::neutron::agents::metadata':
-    debug                 => true,
+    debug                 => $openstack::config::debug,
     metadata_insecure     => false,
     shared_secret         => 'a_big_secret',
     metadata_protocol     => $metadata_protocol,
@@ -27,7 +27,7 @@ class openstack::profile::neutron::compute_agent {
 
   class { '::neutron::agents::l3':
     interface_driver => $openstack::config::l3_interface_driver,
-    debug            => true,
+    debug            => $openstack::config::debug,
     agent_mode       => $openstack::config::compute_agent_mode,
   }
 }

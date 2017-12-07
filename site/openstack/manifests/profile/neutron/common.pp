@@ -4,7 +4,7 @@ class openstack::profile::neutron::common {
   class { '::neutron':
     default_transport_url => os_transport_url({
       'transport' => 'rabbit',
-      'host'      => $ip_addr,
+      'host'      => $openstack::config::controller_mgmt_ip,
       'username'  => 'neutron',
       'password'  => $openstack::config::password,
       }),

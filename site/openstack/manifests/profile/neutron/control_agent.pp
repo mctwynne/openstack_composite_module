@@ -16,7 +16,7 @@ class openstack::profile::neutron::control_agent {
   }
 
   class { '::neutron::agents::metadata':
-    debug                 => true,
+    debug                 => $openstack::config::debug,
     shared_secret         => 'a_big_secret',
     metadata_protocol     => $metadata_protocol,
     metadata_insecure     => false,
@@ -25,13 +25,13 @@ class openstack::profile::neutron::control_agent {
 
   class { '::neutron::agents::l3':
     interface_driver => $openstack::config::l3_interface_driver,
-    debug            => true,
+    debug            => $openstack::config::debug,
     agent_mode       => $openstack::config::l3_network_agent_mode,
   }
 
   class { '::neutron::agents::dhcp':
     interface_driver => $openstack::config::l3_interface_driver,
-    debug            => true,
+    debug            => $openstack::config::debug,
   }
 
   if $openstack::config::enable_lbaas {
