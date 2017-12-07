@@ -23,18 +23,18 @@ class openstack::profile::neutron::api {
   Rabbitmq_user_permissions['neutron@/'] -> Service<| tag == 'neutron-service' |>
 
   class { '::neutron::db::mysql':
-    password => 'super_secret',
+    password => $openstack::config::password,
     allowed_hosts => '%',
   }
   class { '::neutron::keystone::auth':
     public_url   => "${base_url}:9696",
     internal_url => "${base_url}:9696",
     admin_url    => "${base_url}:9696",
-    password     => 'super_secret',
+    password     => $openstack::config::password,
   }
   class { '::neutron::client': }
   class { '::neutron::keystone::authtoken':
-    password            => 'super_secret',
+    password            => $openstack::config::password,
     user_domain_name    => 'Default',
     project_domain_name => 'Default',
     auth_url            => "${base_url}:35357/v3",
@@ -43,12 +43,16 @@ class openstack::profile::neutron::api {
   }
   class { '::neutron::server':
     database_connection => "mysql+pymysql://neutron:super_secret@${mgmt_ip}/neutron?charset=utf8",
-    service_providers   => ['LOADBALANCERV2:Haproxy:neutron_lbaas.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default'],
+    if $openstack::config::enable_lbaas {
+      service_providers   => ['LOADBALANCERV2:Haproxy:neutron_lbaas.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default'],
+    }
     sync_db             => true,
-    router_distributed  => true,
+    if $openstack::config::enable_dvr {
+      router_distributed  => true,
+    }
   }
   class { '::neutron::server::notifications':
     auth_url => "http://${mgmt_ip}:35357/v3",
-    password => 'super_secret',
+    password => $openstack::config::password,
   }
 }

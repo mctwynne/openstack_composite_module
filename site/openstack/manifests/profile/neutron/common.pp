@@ -1,34 +1,28 @@
 class openstack::profile::neutron::common {
-
-  $controller_mgmt_ip = $openstack::profile::common::interfaces::controller_mgmt_ip
-  $ip_addr = $controller_mgmt_ip
   $base_url = 'http://${ip_addr}'
-
-  $driver = ['openvswitch', 'l2population']
-  $firewall_driver  = 'iptables_hybrid'
 
   class { '::neutron':
     default_transport_url => os_transport_url({
       'transport' => 'rabbit',
       'host'      => $ip_addr,
       'username'  => 'neutron',
-      'password'  => 'super_secret',
+      'password'  => $openstack::config::password,
       }),
     allow_overlapping_ips => true,
-    core_plugin           => 'ml2',
-    service_plugins       => ['router', 'neutron_lbaas.services.loadbalancer.plugin.LoadBalancerPluginv2'],
-    debug                 => true,
-    bind_host             => $ip_addr,
+    core_plugin           => $openstack::config::core_plugin,
+    service_plugins       => $openstack::config::service_plugins,
+    debug                 => $openstack::config::debug,
+    bind_host             => $openstack::config::controller_mgmt_ip,
     global_physnet_mtu    => '1450',
   }
 
   class { '::neutron::plugins::ml2':
-        type_drivers         => ['vxlan', 'gre', 'geneve', 'vlan', 'flat'],
-        tenant_network_types => ['vxlan', 'gre', 'geneve', 'vlan'],
-        vni_ranges           => ['100:2000'],
-        tunnel_id_ranges     => ['100:2000'],
+        type_drivers         => $openstack::config::type_drivers,
+        tenant_network_types => $openstack::config::tenant_network_types,
+        vni_ranges           => $openstack::config::vni_ranges,
+        tunnel_id_ranges     => $openstack::config::tunnel_id_ranges,
         extension_drivers    => 'port_security',
-        mechanism_drivers    => $driver,
-        firewall_driver      => $firewall_driver,
+        mechanism_drivers    => $openstack::config::mechanism_drivers,
+        firewall_driver      => $openstack::config::firewall_driver,
   }
 }

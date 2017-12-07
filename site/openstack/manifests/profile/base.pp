@@ -1,5 +1,7 @@
 class openstack::profile::base {
 
+  include openstack::config
+
   class { 'apt':
     update => {
     frequency => 'always',
