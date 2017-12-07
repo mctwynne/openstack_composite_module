@@ -43,13 +43,9 @@ class openstack::profile::neutron::api {
   }
   class { '::neutron::server':
     database_connection => "mysql+pymysql://neutron:super_secret@${mgmt_ip}/neutron?charset=utf8",
-    if $openstack::config::enable_lbaas {
-      service_providers   => ['LOADBALANCERV2:Haproxy:neutron_lbaas.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default'],
-    }
+    service_providers   => $openstack::config::service_providers,
     sync_db             => true,
-    if $openstack::config::enable_dvr {
-      router_distributed  => true,
-    }
+    router_distributed  => $openstack::config::router_distributed,
   }
   class { '::neutron::server::notifications':
     auth_url => "http://${mgmt_ip}:35357/v3",

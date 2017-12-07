@@ -26,9 +26,7 @@ class openstack::profile::neutron::control_agent {
   class { '::neutron::agents::l3':
     interface_driver => $openstack::config::l3_interface_driver,
     debug            => true,
-    if $openstack::config::enable_dvr {
-      agent_mode       => 'dvr_snat',
-    }
+    agent_mode       => $openstack::config::l3_network_agent_mode,
   }
 
   class { '::neutron::agents::dhcp':

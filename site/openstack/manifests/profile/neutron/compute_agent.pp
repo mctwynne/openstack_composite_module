@@ -28,8 +28,6 @@ class openstack::profile::neutron::compute_agent {
   class { '::neutron::agents::l3':
     interface_driver => $openstack::config::l3_interface_driver,
     debug            => true,
-    if $openstack::config::enable_dvr {
-      agent_mode       => 'dvr',
-    }
+    agent_mode       => $openstack::config::compute_agent_mode,
   }
 }
