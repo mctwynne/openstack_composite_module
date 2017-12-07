@@ -19,6 +19,7 @@ class openstack::config {
   $global_physnet_mtu = '1450'
   $type_drivers = ['vxlan', 'gre', 'geneve', 'vlan', 'flat']
   $tenant_network_types = ['vxlan', 'gre', 'geneve', 'vlan']
+  $tunnel_types = ['vxlan', 'gre', 'geneve', 'vlan']
   $vni_ranges = ['100:2000']
   $tunnel_id_ranges = ['100:2000']
   $bridge_uplinks = ['br-ex:ens5']
