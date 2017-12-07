@@ -23,7 +23,7 @@ class openstack::config {
   $bridge_uplinks   => ['br-ex:ens5']
   $bridge_mappings  => ['external:br-ex']
   $l3_interface_driver = 'openvswitch'
-  $enable_dvr = true
+  $enable_dvr = false
 
   if $enable_lbaas {
     $service_plugins = ['router', 'neutron_lbaas.services.loadbalancer.plugin.LoadBalancerPluginv2']
