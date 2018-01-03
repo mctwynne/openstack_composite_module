@@ -2,35 +2,35 @@ forge "http://forge.puppetlabs.com"
 
 mod "neutron",
   :git => "https://github.com/openstack/puppet-neutron.git",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "horizon",
   :git => "https://github.com/openstack/puppet-horizon.git",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "nova",
   :git => "https://github.com/openstack/puppet-nova.git",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "glance",
   :git => "https://github.com/openstack/puppet-glance.git",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "keystone",
   :git => "https://github.com/openstack/puppet-keystone.git",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "openstacklib",
   :git => "https://github.com/openstack/puppet-openstacklib",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "heat",
   :git => "https://github.com/openstack/puppet-heat",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "openstack_extras",
   :git => "https://github.com/openstack/puppet-openstack_extras",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "staging",
   :git => "https://github.com/voxpupuli/puppet-staging.git",
@@ -38,7 +38,7 @@ mod "staging",
 
 mod "oslo",
   :git => "https://github.com/openstack/puppet-oslo",
-  :ref => "stable/ocata"
+  :ref => "stable/pike"
 
 mod "apache",
   :git => "https://github.com/puppetlabs/puppetlabs-apache",

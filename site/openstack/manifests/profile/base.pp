@@ -9,7 +9,7 @@ class openstack::profile::base {
   }
 
   class { '::openstack_extras::repo::debian::ubuntu':
-    release         => 'ocata',
+    release         => 'pike',
     repo            => 'proposed',
     package_require => true,
   }
