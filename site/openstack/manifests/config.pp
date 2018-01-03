@@ -11,15 +11,15 @@ class openstack::config {
   $enable_lbaas = true
 
   # Neutron
-  $router_distributed = false
+  $router_distributed = true
   $core_plugin = 'ml2'
   $mechanism_drivers = ['openvswitch', 'l2population']
   $firewall_driver = 'iptables_hybrid'
-  $ovs_tun_types = ['vxlan', 'gre', 'geneve']
+  $ovs_tunnel_types = ['vxlan', 'gre', 'geneve']
   $global_physnet_mtu = '1450'
   $type_drivers = ['vxlan', 'gre', 'geneve', 'vlan', 'flat']
   $tenant_network_types = ['vxlan', 'gre', 'geneve', 'vlan']
-  $tunnel_types = ['vxlan', 'gre', 'geneve', 'vlan']
+  $tunnel_types = ['vxlan', 'gre', 'geneve']
   $vni_ranges = ['100:2000']
   $tunnel_id_ranges = ['100:2000']
   $bridge_uplinks = ['br-ex:ens5']
@@ -27,8 +27,8 @@ class openstack::config {
   $l3_interface_driver = 'openvswitch'
 
   if $router_distributed {
-    $l3_network_agent_mode = 'dvr_snat'
-    $l3_compute_agent_mode = 'snat'
+    $l3_network_agent_mode = 'dvr_no_external'
+    $l3_compute_agent_mode = 'dvr'
     $enable_distributed_routing = true
   }
   else {

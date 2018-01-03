@@ -11,7 +11,7 @@ class openstack::profile::neutron::compute_agent {
     manage_vswitch   => true,
     l2_population    => true,
     local_ip         => $openstack::config::tnl_ip,
-    tunnel_types     => $openstack::config::tunnel_types,
+    tunnel_types     => $openstack::config::ovs_tunnel_types,
     bridge_uplinks   => $openstack::config::bridge_uplinks,
     bridge_mappings  => $openstack::config::bridge_mappings,
     firewall_driver  => $openstack::config::firewall_driver,
@@ -29,7 +29,7 @@ class openstack::profile::neutron::compute_agent {
     class { '::neutron::agents::l3':
       interface_driver => $openstack::config::l3_interface_driver,
       debug            => $openstack::config::debug,
-      agent_mode       => $openstack::config::compute_agent_mode,
+      agent_mode       => $openstack::config::l3_compute_agent_mode,
     }
   }
 }
