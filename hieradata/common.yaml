@@ -1,3 +1,3 @@
 ---
-nova::db::sync::db_sync_timeout: 700
-neutron::db::sync::db_sync_timeout: 700
+nova::db::sync::db_sync_timeout: 1800
+neutron::db::sync::db_sync_timeout: 1800
