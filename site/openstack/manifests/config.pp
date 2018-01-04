@@ -27,8 +27,8 @@ class openstack::config {
   $l3_interface_driver = 'openvswitch'
 
   if $router_distributed {
-    $l3_network_agent_mode = 'dvr_no_external'
-    $l3_compute_agent_mode = 'dvr'
+    $l3_network_agent_mode = 'dvr_snat'
+    $l3_compute_agent_mode = 'dvr_no_external'
     $enable_distributed_routing = true
   }
   else {
