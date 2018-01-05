@@ -24,7 +24,7 @@ class openstack::profile::neutron::lbaas {
   }
 
   class { '::octavia::db':
-    database_connection => } 'mysql+pymysql://octavia:super_secret@127.0.0.1/octavia?charset=utf8',
+    database_connection => 'mysql+pymysql://octavia:super_secret@127.0.0.1/octavia?charset=utf8',
   }
 
 	class { '::octavia::logging':
