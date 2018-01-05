@@ -39,7 +39,7 @@ class openstack::config {
 
   if $enable_lbaas {
     $service_plugins = ['router', 'neutron_lbaas.services.loadbalancer.plugin.LoadBalancerPluginv2']
-    $service_providers = ['LOADBALANCERV2:Haproxy:neutron_lbaas.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default']
+    $service_providers = ['LOADBALANCERV2:Octavia:neutron_lbaas.drivers.octavia.driver.OctaviaDriver:default']
   }
   else {
     $service_plugins = ['router']
