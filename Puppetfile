@@ -1,5 +1,9 @@
 forge "http://forge.puppetlabs.com"
 
+mod "octavia",
+  :git => "https://github.com/openstack/puppet-octavia.git",
+  :ref => "stable/pike"
+
 mod "neutron",
   :git => "https://github.com/openstack/puppet-neutron.git",
   :ref => "stable/pike"
