@@ -16,7 +16,7 @@ class openstack::profile::neutron::lbaas {
 
   class { '::octavia::db::mysql':
     password      => 'super_secret',
-    allowed_hosts => '*',
+    allowed_hosts => '%',
   }
 
   class { '::octavia::keystone::auth':
